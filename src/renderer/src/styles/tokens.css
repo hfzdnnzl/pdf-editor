@@ -1,0 +1,110 @@
+:root {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --bg-elevated: #131a23;
+  --panel: #161d27;
+  --panel-2: #1c2530;
+  --panel-3: #232e3b;
+  --border: #26313d;
+  --border-strong: #34414f;
+  --text: #e8eef6;
+  --text-muted: #94a3b4;
+  --text-faint: #6b7a8c;
+  --accent: #4c8dff;
+  --accent-strong: #2f6fe0;
+  --accent-soft: rgba(76, 141, 255, 0.16);
+  --danger: #f2555a;
+  --success: #3fb950;
+  --warning: #d29922;
+  --canvas: #0a0e13;
+  --page-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eef1f5;
+  --bg-elevated: #f7f9fb;
+  --panel: #ffffff;
+  --panel-2: #f2f5f9;
+  --panel-3: #e6ecf3;
+  --border: #d8e0e9;
+  --border-strong: #c2ccd8;
+  --text: #101821;
+  --text-muted: #56657a;
+  --text-faint: #7d8b9d;
+  --accent: #2f6fe0;
+  --accent-strong: #1f56bd;
+  --accent-soft: rgba(47, 111, 224, 0.12);
+  --danger: #d92d20;
+  --success: #12805c;
+  --warning: #a9660b;
+  --canvas: #dfe5ec;
+  --page-shadow: 0 10px 28px rgba(28, 45, 68, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+input[type='range'] {
+  accent-color: var(--accent);
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -1,0 +1,55 @@
+appId: com.pdfstudio.app
+productName: PDF Studio
+copyright: Copyright © 2026 PDF Studio
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+asar: true
+compression: normal
+mac:
+  category: public.app-category.productivity
+  icon: build/icon.png
+  darkModeSupport: true
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  target:
+    - target: dmg
+      arch:
+        - arm64
+        - x64
+    - target: zip
+      arch:
+        - arm64
+        - x64
+  artifactName: ${productName}-${version}-${arch}.${ext}
+dmg:
+  title: ${productName}
+win:
+  icon: build/icon.png
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - arm64
+    - target: portable
+      arch:
+        - x64
+  artifactName: ${productName}-${version}-${arch}.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  shortcutName: PDF Studio
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}
+fileAssociations:
+  - ext: pdf
+    name: PDF document
+    description: PDF document
+    role: Viewer
+    mimeType: application/pdf
