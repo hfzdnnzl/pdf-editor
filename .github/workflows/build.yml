@@ -47,7 +47,17 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Build installers
-        run: npx electron-builder --${{ matrix.target }} --publish never
+        shell: bash
+        # electron-builder treats a defined-but-empty CSC_LINK as a certificate path and fails with
+        # "<repo> not a file", so empty signing variables must be unset before packaging. Signing is
+        # enabled automatically once the matching repository secrets exist.
+        run: |
+          [ -n "$CSC_LINK" ] || unset CSC_LINK
+          [ -n "$CSC_KEY_PASSWORD" ] || unset CSC_KEY_PASSWORD
+          [ -n "$APPLE_ID" ] || unset APPLE_ID
+          [ -n "$APPLE_APP_SPECIFIC_PASSWORD" ] || unset APPLE_APP_SPECIFIC_PASSWORD
+          [ -n "$APPLE_TEAM_ID" ] || unset APPLE_TEAM_ID
+          npx electron-builder --${{ matrix.target }} --publish never
         env:
           # Optional: set these repository secrets to produce signed builds.
           CSC_LINK: ${{ secrets.CSC_LINK }}
