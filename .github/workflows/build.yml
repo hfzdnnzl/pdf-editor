@@ -11,6 +11,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  # Needed to attach the installers to the GitHub release created for `v*` tags.
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -73,3 +77,17 @@ jobs:
             release/*.dmg
             release/*.zip
             release/*.exe
+      - name: Attach installers to the GitHub release
+        # Only on `v*` tags (e.g. `git tag v1.0.0 && git push origin v1.0.0`). Both matrix jobs
+        # write to the same release; the action creates it on first use and updates it afterwards.
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: PDF Studio ${{ github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: false
+          # Each runner only has its own platform's files, so the globs are a no-op elsewhere.
+          files: |
+            release/*.exe
+            release/*.dmg
+            release/*.zip
